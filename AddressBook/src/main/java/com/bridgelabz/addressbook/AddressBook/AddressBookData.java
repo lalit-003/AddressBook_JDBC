@@ -1,5 +1,7 @@
 package com.bridgelabz.addressbook.AddressBook;
 
+import java.sql.Date;
+
 public class AddressBookData {
 	
 	private String firstname;
@@ -10,10 +12,10 @@ public class AddressBookData {
 	private int zip;
 	private int phonenumber;
 	private String email;
-	
+	private Date date;
 	
 	public AddressBookData(String firstname, String lastname, String address, String city, String state, int zip,
-			int phonenumber, String email) {
+			int phonenumber, String email,Date date) {
             this.firstname = firstname;
             this.lastname = lastname;
             this.address = address;
@@ -22,6 +24,7 @@ public class AddressBookData {
             this.zip = zip;
             this.phonenumber = phonenumber;
             this.email = email;
+            this.date = date;
 	}
 	public String getFirstname() {
 		return firstname;
@@ -76,8 +79,15 @@ public class AddressBookData {
 	public String toString() {
 		
 		return  "firstname = " +firstname +", lastname = "+ lastname +", Address = " + address + ", city = "+city + ", state = "+ state + ", "
-				+ "zip = "+ zip  +", phoneNumber = " +phonenumber + ", email = "+email;
+				+ "zip = "+ zip  +", phoneNumber = " +phonenumber + ", email = "+email +", date = "+date;
 				}
+	
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
 
 }
