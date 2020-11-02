@@ -1,6 +1,7 @@
 package com.bridgelabz.addressbook.AddressBook;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.protobuf.Empty;
 
 public class AddressBook_DataBaseService {
 	
@@ -30,6 +33,16 @@ public class AddressBook_DataBaseService {
 		System.out.println("Connection is successful !! " + connection);
 		return connection;
 	}
+	public List<AddressBookData> getList( ResultSet resultSet) throws SQLException
+	{
+		List<AddressBookData> addressBookList= new ArrayList<>();
+		while(resultSet.next()) {
+			addressBookList.add(new AddressBookData(resultSet.getString("firstname"), resultSet.getString("lastname"),
+					resultSet.getString("address"),resultSet.getString("city"),resultSet.getString("state"),resultSet.getInt("zip"),
+					resultSet.getInt("phonenumber"),resultSet.getString("email") ,resultSet.getDate("date_added")));
+		}
+		return addressBookList;
+	}
 	
 	public List<AddressBookData> readData()
 	{
@@ -40,11 +53,7 @@ public class AddressBook_DataBaseService {
 		{
 		Statement statement = connection.createStatement();
 		ResultSet resultSet = statement.executeQuery(sql);
-		while(resultSet.next()) {
-			addressBookList.add(new AddressBookData(resultSet.getString("firstname"), resultSet.getString("lastname"),
-					resultSet.getString("address"),resultSet.getString("city"),resultSet.getString("state"),resultSet.getInt("zip"),
-					resultSet.getInt("phonenumber"),resultSet.getString("email") ));
-		}
+		addressBookList = this.getList(resultSet);
 		}
 		catch(SQLException e)
 		{
@@ -76,12 +85,8 @@ public class AddressBook_DataBaseService {
 		try {
 		addressBookDataStatement.setString(1, firstname);
 		ResultSet resultSet = addressBookDataStatement.executeQuery();
-		while (resultSet.next()) {
-			addressBookList.add(new AddressBookData(resultSet.getString("firstname"), resultSet.getString("lastname"),
-					resultSet.getString("address"),resultSet.getString("city"),resultSet.getString("state"),resultSet.getInt("zip"),
-					resultSet.getInt("phonenumber"),resultSet.getString("email") ));
-         		}
-						} catch (Exception e) {
+		addressBookList = this.getList(resultSet);
+		} catch (Exception e) {
 				e.printStackTrace();
 			}
 			return addressBookList;
@@ -109,5 +114,26 @@ public class AddressBook_DataBaseService {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+
+	public List<AddressBookData> getAddressBookDataForDateRange(Date startDate, Date endDate) {
+		String  sql=String.format("select * from address_table where date_added between '%s' AND '%s';",
+				(startDate),(endDate));
+		return getAddressBookDataUsingDB(sql);
+	}
+
+
+	private List<AddressBookData> getAddressBookDataUsingDB(String sql) {
+		List<AddressBookData> addressBookList= new ArrayList<>();
+		try(Connection connection = this.getConnection()){
+			Statement statement=connection.createStatement();
+			ResultSet resultSet=statement.executeQuery(sql);
+			addressBookList=this.getList(resultSet);
+					}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(addressBookList);
+	   return addressBookList;	
 	}
 }

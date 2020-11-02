@@ -1,6 +1,7 @@
 package com.bridgelabz.addressbook.AddressBook;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -50,5 +51,9 @@ public class AddressBook_DB {
 		} catch (IndexOutOfBoundsException e) {
 		}
 		return false;
+	}
+
+	public List<AddressBookData> getAddressBookDataForDateRange(Date startDate, Date endDate) {
+		return addressBookService.getAddressBookDataForDateRange( startDate,  endDate);
 	}
 }

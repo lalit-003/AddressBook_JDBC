@@ -2,6 +2,8 @@ package com.bridgelabz.addressbook.AddressBook;
 
 import static org.junit.Assert.assertTrue;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,4 +34,15 @@ public class Testing_AddressBook
  			boolean result = addressBook.checkAddressBookDataSyncWithDB("Priya");
  			Assert.assertTrue(result);
  		}
+ 		
+ 		//UC18 matching address book entries for given date range
+ 				@Test 
+ 				public void givenDateRange_WhenRetrieved_ShouldMatchContactEntriesCount()
+ 				{
+ 					List<AddressBookData> addressBookData = addressBook.readData();
+ 		            LocalDate startDate = LocalDate.of(2018,01,01);
+ 		            LocalDate endDate = LocalDate.now();
+ 		    		addressBookData = addressBook.getAddressBookDataForDateRange(Date.valueOf(startDate), Date.valueOf(endDate));
+ 		    		Assert.assertEquals(7, addressBookData.size());
+ 				}
 }
