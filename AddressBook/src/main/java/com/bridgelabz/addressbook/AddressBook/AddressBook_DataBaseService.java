@@ -148,4 +148,22 @@ public class AddressBook_DataBaseService {
 		String  sql=String.format("select * from address_table where state = '%s';",state);
 		return getAddressBookDataUsingDB(sql);
 	}
+
+
+	public AddressBookData addContactToAddressBook(String firstname, String lastname, String address, String city,
+			String state, int zip, int phonenumber, String email, Date date) {
+		AddressBookData addressBookData = null;
+		String sql = String.format("insert into address_table  values ('%s','%s','%s','%s','%s','%s','%s','%s','%s');",firstname,lastname,address,city,state,zip,phonenumber,email,date);
+		try(Connection connection=getConnection()) {
+		Statement statement = connection.createStatement();
+		int rowAffected = statement.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
+		System.out.println("No of new entries to address book : "+rowAffected);
+		addressBookData = new AddressBookData(firstname,lastname,address,city,state,zip,phonenumber,email,date);
+		}
+		catch (SQLException exception) {
+			System.out.println("exception occured");
+   exception.printStackTrace();
+        }
+		 return addressBookData;
+	}
 }
