@@ -60,4 +60,8 @@ public class AddressBook_DB {
 	public List<AddressBookData> getAddressBookDataByCity(String city) {
 		return addressBookService.getAddressBookDataByCity(city);
 	}
+
+	public List<AddressBookData> getAddressBookDataByState(String state) {
+		return addressBookService.getAddressBookDataByState(state);
+	}
 }

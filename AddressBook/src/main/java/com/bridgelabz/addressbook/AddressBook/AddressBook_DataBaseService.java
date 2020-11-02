@@ -141,6 +141,11 @@ public class AddressBook_DataBaseService {
 	public List<AddressBookData> getAddressBookDataByCity(String city) {
 		String  sql=String.format("select * from address_table where city = '%s';",city);
 		return getAddressBookDataUsingDB(sql);
-          
+	}
+
+
+	public List<AddressBookData> getAddressBookDataByState(String state) {
+		String  sql=String.format("select * from address_table where state = '%s';",state);
+		return getAddressBookDataUsingDB(sql);
 	}
 }

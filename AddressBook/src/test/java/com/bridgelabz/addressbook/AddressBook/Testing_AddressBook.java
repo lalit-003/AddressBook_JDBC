@@ -55,5 +55,15 @@ public class Testing_AddressBook
  		    		addressBookData = addressBook.getAddressBookDataByCity(city);
  		    		Assert.assertEquals(3, addressBookData.size());
  				}
+ 				
+ 				@Test 
+ 				public void givenState_WhenRetrieved_ShouldMatchContactEntriesCount()
+ 				{
+ 					List<AddressBookData> addressBookData = addressBook.readData();
+ 		            String state = "haryana";
+ 		    		addressBookData = addressBook.getAddressBookDataByState(state);
+ 		    		Assert.assertEquals(6, addressBookData.size());
+ 				}
+
 
 }
