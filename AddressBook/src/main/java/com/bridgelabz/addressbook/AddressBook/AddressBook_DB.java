@@ -64,4 +64,9 @@ public class AddressBook_DB {
 	public List<AddressBookData> getAddressBookDataByState(String state) {
 		return addressBookService.getAddressBookDataByState(state);
 	}
+
+	public void addContactToAddressBook(String firstname, String lastname, String address, String city, String state,
+			int zip, int phonenumber, String email, Date date) {
+           addressBookList.add(addressBookService.addContactToAddressBook(firstname,lastname,address,city,state,zip,phonenumber,email,date));		
+	}
 }

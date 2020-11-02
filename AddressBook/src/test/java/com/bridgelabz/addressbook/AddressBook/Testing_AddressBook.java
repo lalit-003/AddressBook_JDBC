@@ -46,7 +46,7 @@ public class Testing_AddressBook
  		    		Assert.assertEquals(7, addressBookData.size());
  				}
  				
- 				//UC18 matching address book entries by city or state
+ 				//UC19 matching address book entries by city or state
  				@Test 
  				public void givenCity_WhenRetrieved_ShouldMatchContactEntriesCount()
  				{
@@ -65,5 +65,12 @@ public class Testing_AddressBook
  		    		Assert.assertEquals(6, addressBookData.size());
  				}
 
-
+ 			// UC20 new contact added and synced wih database
+ 				@Test
+ 				public void givenNewContact_WhenAdded_ShouldSyncWithDatabase() {
+ 					addressBook.readData();
+ 					addressBook.addContactToAddressBook("balbir", "gahlawat","khanpur","jhajjar","haryana",123455,12324435,"balbir@abc.com",Date.valueOf(LocalDate.of(2019,12,23)));
+ 					boolean result = addressBook.checkAddressBookDataSyncWithDB("balbir");
+ 					Assert.assertTrue(result);
+ 				}
 }
