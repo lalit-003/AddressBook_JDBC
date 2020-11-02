@@ -45,4 +45,15 @@ public class Testing_AddressBook
  		    		addressBookData = addressBook.getAddressBookDataForDateRange(Date.valueOf(startDate), Date.valueOf(endDate));
  		    		Assert.assertEquals(7, addressBookData.size());
  				}
+ 				
+ 				//UC18 matching address book entries by city or state
+ 				@Test 
+ 				public void givenCity_WhenRetrieved_ShouldMatchContactEntriesCount()
+ 				{
+ 					List<AddressBookData> addressBookData = addressBook.readData();
+ 		            String city = "gurgaon";
+ 		    		addressBookData = addressBook.getAddressBookDataByCity(city);
+ 		    		Assert.assertEquals(3, addressBookData.size());
+ 				}
+
 }

@@ -56,4 +56,8 @@ public class AddressBook_DB {
 	public List<AddressBookData> getAddressBookDataForDateRange(Date startDate, Date endDate) {
 		return addressBookService.getAddressBookDataForDateRange( startDate,  endDate);
 	}
+
+	public List<AddressBookData> getAddressBookDataByCity(String city) {
+		return addressBookService.getAddressBookDataByCity(city);
+	}
 }
