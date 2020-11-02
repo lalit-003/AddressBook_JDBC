@@ -136,4 +136,11 @@ public class AddressBook_DataBaseService {
 		System.out.println(addressBookList);
 	   return addressBookList;	
 	}
+
+
+	public List<AddressBookData> getAddressBookDataByCity(String city) {
+		String  sql=String.format("select * from address_table where city = '%s';",city);
+		return getAddressBookDataUsingDB(sql);
+          
+	}
 }
