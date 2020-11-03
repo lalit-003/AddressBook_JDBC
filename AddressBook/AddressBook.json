@@ -1,0 +1,28 @@
+{
+	"Contacts":[
+    {
+      "firstname": "mohit",
+      "lastname": "gahlawat",
+      "address": "chintels",
+       "city": "gurgaon",
+       "state" : "haryana",
+        "zip" :   124142  ,
+      "phonenumber": 12345678   ,
+      "email"  :   "mohit@abc.com" ,
+      "date "  :  "nov 10 ,2019"    
+    },
+	
+  {
+      
+      "firstname": "saurav",
+      "lastname": "gahlawat",
+      "address": "sector",
+       "city": "bhiwani",
+       "state" : "haryana",
+        "zip" :   124142  ,
+      "phonenumber": 12345678   ,
+      "email"  :   "saurav@abc.com" ,
+      "date "  :  "nov 10 ,2019"    
+    }
+  ]
+}
