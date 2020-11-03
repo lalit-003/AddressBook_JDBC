@@ -23,7 +23,7 @@ public class AddressBook_DB {
 
 	public AddressBook_DB(List<AddressBookData> addressBookList) {
 		this();
-		this.addressBookList = addressBookList;
+		this.addressBookList = new ArrayList<>(addressBookList);
 	}
 	
 	public List<AddressBookData> readData() {
