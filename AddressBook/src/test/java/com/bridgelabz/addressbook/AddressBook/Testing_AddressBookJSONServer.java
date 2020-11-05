@@ -57,7 +57,7 @@ public class Testing_AddressBookJSONServer {
 			addressBook = new AddressBook_DB(Arrays.asList(arrayOfEmps));
 
 			AddressBookData addressBookData = null;
-			addressBookData = new AddressBookData("sharwan", "singh", "khanpur", "south", "delhi", 123455, 12324435,
+			addressBookData = new AddressBookData(0,"sharwan", "singh", "khanpur", "south", "delhi", 123455, 12324435,
 					"sharwan@abc.com");
 			Response response = addContactToJsonServer(addressBookData);
 			int statusCode = response.getStatusCode();
@@ -78,14 +78,12 @@ public class Testing_AddressBookJSONServer {
 		addressBookDB = new AddressBook_DB(Arrays.asList(arrayOfContacts));
 
 		AddressBookData[] arrayOfContactEntries = {
-				new AddressBookData("sharwan", "singh", "khanpur", "south", "delhi", 123455, 12324435,
-						"sharwan@abc.com", Date.valueOf(LocalDate.now())),
-				new AddressBookData("ankur", "singh", "khanpur", "south", "delhi", 123455, 12324435, "ankur@abc.com",
-						Date.valueOf(LocalDate.now())),
-				new AddressBookData("Bittu", "singh", "khanpur", "south", "delhi", 123455, 12324435, "bittu@abc.com",
-						Date.valueOf(LocalDate.now())),
-				new AddressBookData("Amit", "singh", "khanpur", "south", "delhi", 123455, 12324435, "amit@abc.com",
-						Date.valueOf(LocalDate.now())) };
+				new AddressBookData(0,"sharwan", "singh", "khanpur", "south", "delhi", 123455, 12324435,
+						"sharwan@abc.com"),
+				new AddressBookData(0,"ankur", "singh", "khanpur", "south", "delhi", 123455, 12324435, "ankur@abc.com"),
+				new AddressBookData(0,"Bittu", "singh", "khanpur", "south", "delhi", 123455, 12324435, "bittu@abc.com"),
+				new AddressBookData(0,"Amit", "singh", "khanpur", "south", "delhi", 123455, 12324435, "amit@abc.com") 
+				};
 
 		for (AddressBookData addressBookData : arrayOfContactEntries) {
 			Response response = addContactToJsonServer(addressBookData);
@@ -98,5 +96,27 @@ public class Testing_AddressBookJSONServer {
 		long entries = addressBookDB.countEntries();
 		Assert.assertEquals(7, entries);
 	}
+	
+	//updating contact details(city) to json server
+	  @Test 
+	  public void givenNewCityToEmployee_WhenUpdated_ShouldMatch200Response()
+	  {
+		  AddressBookData[] arrayOfContacts = getContactList();
+			AddressBook_DB addressBookDB;
+			addressBookDB = new AddressBook_DB(Arrays.asList(arrayOfContacts));
+
+			addressBookDB.updateAddressBookDataJSONServer("Amit", "jaipur");
+			AddressBookData addressBookData = addressBookDB.getAddressBookData("Amit");
+
+			 String empJson = new Gson().toJson(addressBookData);
+	          RequestSpecification request = RestAssured.given();
+	          request.header("Content-Type","application/json");
+	          request.body(empJson);
+              System.out.println(addressBookData.getId());
+              System.out.println(addressBookData.getCity());
+	          Response response = request.put("/AddressBook/"+addressBookData.getId());
+				int statusCode = response.getStatusCode();
+				Assert.assertEquals(200,statusCode);
+	  }
 
 }

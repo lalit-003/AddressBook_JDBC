@@ -42,7 +42,6 @@
       "zip": 123455,
       "phonenumber": 12324435,
       "email": "sharwan@abc.com",
-      "date": "Nov 5, 2020",
       "id": 4
     },
     {
@@ -54,7 +53,6 @@
       "zip": 123455,
       "phonenumber": 12324435,
       "email": "ankur@abc.com",
-      "date": "Nov 5, 2020",
       "id": 5
     },
     {
@@ -66,19 +64,17 @@
       "zip": 123455,
       "phonenumber": 12324435,
       "email": "bittu@abc.com",
-      "date": "Nov 5, 2020",
       "id": 6
     },
     {
       "firstname": "Amit",
       "lastname": "singh",
       "address": "khanpur",
-      "city": "south",
+      "city": "jaipur",
       "state": "delhi",
       "zip": 123455,
       "phonenumber": 12324435,
       "email": "amit@abc.com",
-      "date": "Nov 5, 2020",
       "id": 7
     }
   ]
