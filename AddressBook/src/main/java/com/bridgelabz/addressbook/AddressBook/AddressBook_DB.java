@@ -39,7 +39,7 @@ public class AddressBook_DB {
 		if(addressBookData != null) addressBookData.setCity(city);
 	}
 	
-	private AddressBookData getAddressBookData(String firstname) {
+	public AddressBookData getAddressBookData(String firstname) {
       AddressBookData addressBookData ;
       addressBookData = this.addressBookList.stream()
     		             .filter(addressBookEntry  ->  (addressBookEntry.getFirstname()).equals(firstname))
@@ -114,5 +114,10 @@ public class AddressBook_DB {
          this.addContactToAddressBook(addressBookData.getFirstname(), addressBookData.getLastname(), addressBookData.getAddress(),
         		                      addressBookData.getCity(), addressBookData.getState(), addressBookData.getZip(),
         		                      addressBookData.getPhonenumber(), addressBookData.getEmail(), addressBookData.getDate());		
+	}
+
+	public void updateAddressBookDataJSONServer(String firstname, String city) {
+		AddressBookData addressBookData = this.getAddressBookData(firstname);
+		if(addressBookData != null) addressBookData.setCity(city);
 	}
 }
