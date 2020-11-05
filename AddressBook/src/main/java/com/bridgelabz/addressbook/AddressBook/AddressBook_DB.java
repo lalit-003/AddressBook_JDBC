@@ -33,10 +33,10 @@ public class AddressBook_DB {
 
 	public void updateAddressBookData(String firstname, String city)
 	{
-		int result = new AddressBook_DataBaseService().updateEmployeeSalaryResult(firstname, city);
+		int result = new AddressBook_DataBaseService().updateCityUsingSQL(firstname, city);
 		if(result == 0) return;
-		AddressBookData AddressBookData = this.getAddressBookData(firstname);
-		if(AddressBookData != null) AddressBookData.setCity(city);
+		AddressBookData addressBookData = this.getAddressBookData(firstname);
+		if(addressBookData != null) addressBookData.setCity(city);
 	}
 	
 	private AddressBookData getAddressBookData(String firstname) {
@@ -51,7 +51,8 @@ public class AddressBook_DB {
 	public boolean checkAddressBookDataSyncWithDB(String firstname) {
 		try {
 			return addressBookService.getAddressBookData(firstname).get(0).getFirstname().equals(getAddressBookData(firstname).getFirstname());
-		} catch (IndexOutOfBoundsException e) {
+		} catch (Exception e) {
+		e.printStackTrace();
 		}
 		return false;
 	}
@@ -107,5 +108,11 @@ public class AddressBook_DB {
 
 	public long countEntries() {
 	 return addressBookList.size();
+	}
+
+	public void addContactToBook(AddressBookData addressBookData) {
+         this.addContactToAddressBook(addressBookData.getFirstname(), addressBookData.getLastname(), addressBookData.getAddress(),
+        		                      addressBookData.getCity(), addressBookData.getState(), addressBookData.getZip(),
+        		                      addressBookData.getPhonenumber(), addressBookData.getEmail(), addressBookData.getDate());		
 	}
 }

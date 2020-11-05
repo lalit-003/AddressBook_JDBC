@@ -16,15 +16,20 @@ public class AddressBookData {
 	
 	public AddressBookData(String firstname, String lastname, String address, String city, String state, int zip,
 			int phonenumber, String email,Date date) {
-            this.firstname = firstname;
-            this.lastname = lastname;
-            this.address = address;
-            this.city = city;
-            this.state = state;
-            this.zip = zip;
-            this.phonenumber = phonenumber;
-            this.email = email;
+            this(firstname,lastname,address,city,state,zip,phonenumber,email);
             this.date = date;
+	}
+	public AddressBookData(String firstname, String lastname, String address, String city, String state, int zip,
+			int phonenumber, String email) {
+		this.firstname = firstname;
+        this.lastname = lastname;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.phonenumber = phonenumber;
+        this.email = email;
+		
 	}
 	public String getFirstname() {
 		return firstname;

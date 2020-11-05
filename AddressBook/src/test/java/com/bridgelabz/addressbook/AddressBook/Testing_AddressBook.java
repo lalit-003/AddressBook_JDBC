@@ -24,15 +24,15 @@ public class Testing_AddressBook
         public void  givenAddressBookData_WhenReturned_ShouldMatchEntryCount()
         {
         	List<AddressBookData> addressBookList = addressBook.readData();
-        	Assert.assertEquals(7,addressBookList.size());
+        	Assert.assertEquals(12,addressBookList.size());
         }
          
-      // UC17 update and sync data in database (using prepared statement)
+      // UC17 update city of contact and sync data in database (using prepared statement)
  		@Test
  		public void givenCity_WhenUpdated_ShouldSyncWithDatabaseUsingPreparedStatement()
  		{
- 			List<AddressBookData> addressBookData = addressBook.readData();
- 			addressBook.updateAddressBookData("Priya","Chandigarh");
+ 			addressBook.readData();
+ 			addressBook.updateAddressBookData("Priya","chandigarh");
  			boolean result = addressBook.checkAddressBookDataSyncWithDB("Priya");
  			Assert.assertTrue(result);
  		}
@@ -42,10 +42,10 @@ public class Testing_AddressBook
  				public void givenDateRange_WhenRetrieved_ShouldMatchContactEntriesCount()
  				{
  					List<AddressBookData> addressBookData = addressBook.readData();
- 		            LocalDate startDate = LocalDate.of(2018,01,01);
+ 		            LocalDate startDate = LocalDate.of(2019,01,01);
  		            LocalDate endDate = LocalDate.now();
  		    		addressBookData = addressBook.getAddressBookDataForDateRange(Date.valueOf(startDate), Date.valueOf(endDate));
- 		    		Assert.assertEquals(7, addressBookData.size());
+ 		    		Assert.assertEquals(8, addressBookData.size());
  				}
  				
  				//UC19 matching address book entries by city or state
@@ -53,9 +53,9 @@ public class Testing_AddressBook
  				public void givenCity_WhenRetrieved_ShouldMatchContactEntriesCount()
  				{
  					List<AddressBookData> addressBookData = addressBook.readData();
- 		            String city = "gurgaon";
+ 		            String city = "jaipur";
  		    		addressBookData = addressBook.getAddressBookDataByCity(city);
- 		    		Assert.assertEquals(3, addressBookData.size());
+ 		    		Assert.assertEquals(1, addressBookData.size());
  				}
  				
  				@Test 
