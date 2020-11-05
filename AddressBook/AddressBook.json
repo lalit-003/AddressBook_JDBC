@@ -31,17 +31,6 @@
       "zip": 123455,
       "phonenumber": 12324435,
       "email": "sharwan@abc.com",
-      "id": 3
-    },
-    {
-      "firstname": "sharwan",
-      "lastname": "singh",
-      "address": "khanpur",
-      "city": "south",
-      "state": "delhi",
-      "zip": 123455,
-      "phonenumber": 12324435,
-      "email": "sharwan@abc.com",
       "id": 4
     },
     {

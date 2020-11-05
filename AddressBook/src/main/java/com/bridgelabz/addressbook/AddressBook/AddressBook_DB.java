@@ -120,4 +120,9 @@ public class AddressBook_DB {
 		AddressBookData addressBookData = this.getAddressBookData(firstname);
 		if(addressBookData != null) addressBookData.setCity(city);
 	}
+
+	public void deleteContactFromJSON(String firstname) {
+	     AddressBookData addressBookData = this.getAddressBookData(firstname);
+	      addressBookList.remove(addressBookData);		
+	}
 }
