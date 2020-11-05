@@ -99,7 +99,7 @@ public class Testing_AddressBookJSONServer {
 	
 	//updating contact details(city) to json server
 	  @Test 
-	  public void givenNewCityToEmployee_WhenUpdated_ShouldMatch200Response()
+	  public void givenNewCityToContact_WhenUpdated_ShouldMatch200Response()
 	  {
 		  AddressBookData[] arrayOfContacts = getContactList();
 			AddressBook_DB addressBookDB;
@@ -118,5 +118,27 @@ public class Testing_AddressBookJSONServer {
 				int statusCode = response.getStatusCode();
 				Assert.assertEquals(200,statusCode);
 	  }
+	  
+	//deleting contact from  json server
+	  @Test 
+	  public void givenContactToDelete_WhenDeleted_ShouldMatch200Response()
+	  {
+		  AddressBookData[] arrayOfContacts = getContactList();
+			AddressBook_DB addressBookDB;
+			addressBookDB = new AddressBook_DB(Arrays.asList(arrayOfContacts));
+
+			AddressBookData addressBookData = addressBookDB.getAddressBookData("sharwan");
+
+	          RequestSpecification request = RestAssured.given();
+	          request.header("Content-Type","application/json");
+	          Response response = request.delete("/AddressBook/"+addressBookData.getId());
+				int statusCode = response.getStatusCode();
+				Assert.assertEquals(200,statusCode);
+
+				addressBookDB.deleteContactFromJSON(addressBookData.getFirstname());
+				long entries = addressBookDB.countEntries();
+				Assert.assertEquals(6,entries);
+	  }
+
 
 }
